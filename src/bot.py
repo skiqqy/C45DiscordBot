@@ -20,6 +20,12 @@ async def score_message_sentiment(sentence):
     score = int(analyser.polarity_scores(sentence)['compound'] * 10)
     return emojis.number_to_emoji(score)
 
+async def add_emoji(message, emoji):
+    try:
+        message.add_reaction(random.choice(emojis.troll_emojis))
+    except Exception as e:
+        print(str(e))
+
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as', self.user)
@@ -34,16 +40,16 @@ class MyClient(discord.Client):
        
 
     async def on_message(self, message):
-
         if message.channel.id == 679599402935123968:
             return
-        
         print(message.reactions)
         try:
-            await message.add_reaction(random.choice(emojis.troll_emojis))
-            await message.add_reaction(score_message_sentiment(message))
+            await add_emoji(random.choice(emojis.troll_emojis))
+            await add_emoji(score_message_sentiment(message))
         except Exception:
             print("bruhf")
+
+        
         
         # Ignore messages from the bot
         if message.author == self.user:
