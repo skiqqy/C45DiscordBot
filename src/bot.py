@@ -41,7 +41,7 @@ class MyClient(discord.Client):
         print(message.reactions)
         await message.add_reaction("🅱️")
         await message.add_reaction("🍆")
-        await message.add_reaction(score_message_sentiment(message))
+        #await message.add_reaction(score_message_sentiment(message))
         
         # Ignore messages from the bot
         if message.author == self.user:
