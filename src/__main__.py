@@ -60,14 +60,16 @@ class MyClient(discord.Client):
             return
         print(message.reactions)
 
-        try:
-            sendIRC(message.channel, message)
-        except Exception:
+
+        if os.getenv("bot_irc") == "1":
             try:
-                server.connect("192.168.1.121", 6667, "c45_bot")
-            except:
-                print("Reconnect failed")
-            print("Failed to send IRC")
+                sendIRC(message.channel, message)
+            except Exception:
+                try:
+                    server.connect("192.168.1.121", 6667, "c45_bot")
+                except:
+                    print("Reconnect failed")
+                print("Failed to send IRC")
 
         # moduleLoader.loadModules("on_message")
 
@@ -122,14 +124,15 @@ class MyClient(discord.Client):
 
 
 if __name__ == "__main__":
-    try:
-        # Create a client
-        client = irc.client.Reactor()
-        server = client.server()
-        server.connect("192.168.1.121", 6667, "c45_bot")
-        server.join("#club45")
-    except Exception:
-        print("Error setting up irc")
+    if os.getenv("bot_irc") == "1":
+        try:
+            # Create a client
+            client = irc.client.Reactor()
+            server = client.server()
+            server.connect("192.168.1.121", 6667, "c45_bot")
+            server.join("#club45")
+        except Exception:
+            print("Error connecting IRC")
 
     client = MyClient()
     client.run(os.getenv("C45_Token"))
