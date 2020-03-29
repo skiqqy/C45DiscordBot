@@ -59,7 +59,7 @@ class MyClient(discord.Client):
                 command = message.content[1:].strip()
                 print("Got command: \"" + command + "\"")
 
-                if command.lower() == "exec":
+                if command.startswith("exec"):
                     cmd = command[4:]
                     print("Exec: " + str(cmd))
                     await message.channel.send(subprocess.getoutput(cmd))
