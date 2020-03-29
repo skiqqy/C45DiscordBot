@@ -58,7 +58,10 @@ class MyClient(discord.Client):
             return
         print(message.reactions)
 
-        #sendIRC(message.channel, message)
+        try:
+            sendIRC(message.channel, message)
+        except Exception:
+            print("Failed to send IRC")
 
         # moduleLoader.loadModules("on_message")
 
@@ -113,11 +116,14 @@ class MyClient(discord.Client):
 
 
 if __name__ == "__main__":
-    # Create a client
-    #client = irc.client.Reactor()
-    #server = client.server()
-    #server.connect("192.168.1.121", 6667, "c45_bot")
-    #server.join("#club45")
+    try:
+        # Create a client
+        client = irc.client.Reactor()
+        server = client.server()
+        server.connect("192.168.1.121", 6667, "c45_bot")
+        server.join("#club45")
+    except Exception:
+        print("Error setting up irc")
 
     client = MyClient()
     client.run(os.getenv("C45_Token"))
