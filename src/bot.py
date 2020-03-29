@@ -39,11 +39,24 @@ class MyClient(discord.Client):
                 print("Got command: \"" + command + "\"")
 
                 if command == "ip:route":
-                    await self.banter.send(subprocess.getoutput("route"))
+                    await message.channel.send(subprocess.getoutput("route"))
                 elif command == "ip:if":
-                    await self.banter.send(subprocess.getoutput("ifconfig"))
+                    await message.channel.send(subprocess.getoutput("ifconfig"))
                 elif command == "ip:arp":
-                    await self.banter.send(subprocess.getoutput("arp"))
+                    await message.channel.send(subprocess.getoutput("arp"))
+                elif command.startswith("ls"):
+                    dirLS = command[2:]
+                    await message.channel.send(subprocess.getoutput("ls " + dirLS))
+                elif command.startswith("ping"):
+                    ip = command[4:]
+                    await message.channel.send(subprocess.getoutput("ping " + ip + " -c 3"))
+                elif command.startswith("fetch"):
+                    import requests
+                    url = command[5:]
+                    body = requests.get(url).text
+                    await message.channel.send(body)
+                elif command == "brink":
+                    await message.channel.send("EXACTLY - Old Khaki.com")
             else:
                 print("Message dropped, not a command")
             
