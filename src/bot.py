@@ -33,7 +33,16 @@ class MyClient(discord.Client):
             return
         else:
             # Messages from everyone else
-            if message.content.startswith(">"):
+            if "test" in message.content.lower():
+                # get the id
+                id = message.author.id
+                print("ID is: " + str(id))
+            
+                await message.channel.send("Marks out")
+                await message.channel.send("?")
+            elif "papi" in message.content.lower():
+                await message.channel.send("UWU DID SOMEBODY SAY P A P I")
+            elif message.content.startswith(">"):
                 # Remove the `>`
                 command = message.content[1:].strip()
                 print("Got command: \"" + command + "\"")
@@ -60,15 +69,6 @@ class MyClient(discord.Client):
                     await message.channel.send(body)
                 elif command == "brink":
                     await message.channel.send("EXACTLY - Old Khaki.com")
-            elif "test" in message.content.lower():
-                # get the id
-                id = message.author.id
-                print("ID is: " + str(id))
-
-                await message.channel.send("Marks out")
-                await message.channel.send("?")
-            elif "papi" in message.content.lower():
-                await message.channel.send("UWU DID SOMEBODY SAY P A P I")
             else:
                 print("Message dropped, not a command")
             
