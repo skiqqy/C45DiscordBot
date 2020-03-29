@@ -39,8 +39,11 @@ class MyClient(discord.Client):
             return
         
         print(message.reactions)
-        await message.add_reaction(random.choice(emojis.troll_emojis))
-        await message.add_reaction(score_message_sentiment(message))
+        try:
+            await message.add_reaction(random.choice(emojis.troll_emojis))
+            await message.add_reaction(score_message_sentiment(message))
+        except Exception:
+            print("bruhf")
         
         # Ignore messages from the bot
         if message.author == self.user:
