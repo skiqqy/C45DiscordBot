@@ -28,18 +28,15 @@ class MyClient(discord.Client):
             print(guild)
             guilds.append(guild)
         c45 = guilds[0]
-        channels = await c45.fetch_channels()
+        webdev = guilds[1]
+        channels = await webdev.fetch_channels()
         print(channels)
-        banter = None
-        for channel in channels:
-            if channel.id==615645678147862538:
-                banter = channel
-                self.banter = banter
-                break
        
 
     async def on_message(self, message):
 
+        if message.channel.id == 679599402935123968:
+            return
         
         print(message.reactions)
         await message.add_reaction(random.choice(emojis.troll_emojis))
