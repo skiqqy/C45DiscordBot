@@ -22,7 +22,7 @@ async def score_message_sentiment(sentence):
 
 async def add_emoji(message, emoji):
     try:
-        message.add_reaction(emoji)
+        await message.add_reaction(emoji)
     except Exception as e:
         print("Bruh:", str(e))
 
