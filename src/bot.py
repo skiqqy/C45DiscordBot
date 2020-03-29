@@ -13,8 +13,19 @@ import random
 import emojis
 import random
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import moduleLoader
+import irc
+import irc.client
+import os
+import subprocess
 
 analyser = SentimentIntensityAnalyzer()
+
+# Create a client
+client = irc.client.Reactor()
+server = client.server()
+server.connect("192.168.1.121", 6667, "c45_bot")
+server.join("#club45")
 
 def score_message_sentiment(sentence):
     score = int(analyser.polarity_scores(sentence)['compound'] * 10)
@@ -25,6 +36,17 @@ async def add_emoji(message, emoji):
         await message.add_reaction(emoji)
     except Exception as e:
         print("Bruh:", str(e))
+
+
+
+
+
+
+
+
+def sendIRC(channel, message):
+    chan = "#"+str(channel)
+    server.privmsg("#club45", "["+str(message.author)+"]: " + message.content)
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -43,6 +65,10 @@ class MyClient(discord.Client):
         if message.channel.id == 679599402935123968:
             return
         print(message.reactions)
+
+        sendIRC(message.channel, message)
+
+        #moduleLoader.loadModules("on_message")
         
         await add_emoji(message, score_message_sentiment(message.content))
         
