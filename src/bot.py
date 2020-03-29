@@ -46,7 +46,14 @@ async def add_emoji(message, emoji):
 
 def sendIRC(channel, message):
     chan = "#"+str(channel)
-    server.privmsg("#club45", "["+str(message.author)+"]: " + message.content)
+    if message.content != "":
+        server.privmsg("#club45", "["+str(message.author)+"]: " + message.content)
+    if len(message.attachments) > 0:
+        i=0
+        for attach in message.attachments:
+            print(attach)
+            server.privmsg("#club45", "["+str(message.author)+"]: Attachment " + str(i) + ":" +str(attach.url))
+            i+=1
 
 class MyClient(discord.Client):
     async def on_ready(self):
