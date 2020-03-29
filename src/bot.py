@@ -29,6 +29,11 @@ class MyClient(discord.Client):
        
 
     async def on_message(self, message):
+
+        print(message.reactions)
+        await message.add_reaction("🅱️")
+        await message.add_reaction("🍆")
+        
         # Ignore messages from the bot
         if message.author == self.user:
             return
@@ -43,6 +48,7 @@ class MyClient(discord.Client):
                 await message.channel.send("?")
             elif "papi" in message.content.lower():
                 await message.channel.send("UWU DID SOMEBODY SAY P A P I")
+                await message.pin()
             elif "triggered" in message.content.lower():
                 fl = open("./resources/triggered.lol","r")
                 msg = fl.readlines()
