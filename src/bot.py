@@ -40,8 +40,6 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
 
-        if message.channel.id == 615641925466456076:
-            return
         
         print(message.reactions)
         await message.add_reaction(random.choice(emojis.troll_emojis))
