@@ -11,7 +11,10 @@ import os
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as', self.user)
-    
+        bruh = await self.fetch_invite("https://discord.gg/ff2gEm")
+        print("Guild: " + str(bruh.guild))
+        print(type(bruh))
+
     async def on_message(self, message):
         if message.author == self.user:
             return
@@ -22,3 +25,4 @@ class MyClient(discord.Client):
 token = os.getenv("C45_Token");
 client = MyClient()
 client.run(token)
+
