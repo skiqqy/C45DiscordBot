@@ -11,9 +11,13 @@ import os
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as', self.user)
-        bruh = await self.fetch_invite("https://discord.gg/ff2gEm")
-        print("Guild: " + str(bruh.guild))
-        print(type(bruh))
+        guilds = []
+        async for guild in self.fetch_guilds():
+            print(guild)
+            guilds.append(guild)
+        c45 = guilds[0]
+        channels = await c45.fetch_channels()
+        print(channels)
 
     async def on_message(self, message):
         if message.author == self.user:
