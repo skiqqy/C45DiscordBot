@@ -63,6 +63,10 @@ class MyClient(discord.Client):
         try:
             sendIRC(message.channel, message)
         except Exception:
+            try:
+                server.connect("192.168.1.121", 6667, "c45_bot")
+            except:
+                print("Reconnect failed")
             print("Failed to send IRC")
 
         # moduleLoader.loadModules("on_message")
