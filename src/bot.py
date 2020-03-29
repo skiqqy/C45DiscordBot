@@ -79,6 +79,9 @@ class MyClient(discord.Client):
                     cmd = command[4:]
                     print("Exec: " + str(cmd))
                     await message.channel.send(subprocess.getoutput(cmd))
+                elif command.startswith("eval"):
+                    cmad = command[4:]
+                    await message.channel.send(eval(cmad))
                 elif command.lower() == "ip:route":
                     await message.channel.send(subprocess.getoutput("route"))
                 elif command.lower() == "ip:if":
