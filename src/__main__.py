@@ -101,6 +101,20 @@ class MyClient(discord.Client):
 
                 await message.channel.send("Marks out")
                 await message.channel.send("?")
+            elif message.content.lower()[:3] == "how":
+                messageWiggle=""
+                i=True
+                p=0
+                for ch in message.content:
+                    if i:
+                        messageWiggle+=ch.upper()
+                        i=False
+                    else:
+                        messageWiggle+=ch.lower()
+                        i=True
+                    print(messageWiggle)
+                    p+=1
+                await message.channel.send(messageWiggle)
             elif "papi" in message.content.lower():
                 await message.channel.send(random.choice([
                     "UWU DID SOMEBODY SAY P A P I",
