@@ -28,6 +28,7 @@ class MyClient(discord.Client):
             guilds.append(guild)
         c45 = guilds[0]
         channels = await c45.fetch_channels()
+        print(channels)
         banter = None
         for channel in channels:
             if channel.id==615645678147862538:
@@ -37,7 +38,7 @@ class MyClient(discord.Client):
        
 
     async def on_message(self, message):
-
+        
         print(message.reactions)
         await message.add_reaction("🅱️")
         await message.add_reaction("🍆")
