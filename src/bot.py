@@ -11,6 +11,7 @@ import os
 import subprocess
 import random
 import emojis
+import random
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 analyser = SentimentIntensityAnalyzer()
@@ -40,9 +41,8 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         
         print(message.reactions)
-        await message.add_reaction("🅱️")
-        await message.add_reaction("🍆")
-        #await message.add_reaction(score_message_sentiment(message))
+        await message.add_reaction(random.choice(emojis.troll_emojis))
+        await message.add_reaction(score_message_sentiment(message))
         
         # Ignore messages from the bot
         if message.author == self.user:
