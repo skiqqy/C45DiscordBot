@@ -67,6 +67,8 @@ class MyClient(discord.Client):
 
                 await message.channel.send("Marks out")
                 await message.channel.send("?")
+            elif "papi" in message.content.lower():
+                await message.channel.send("UWU DID SOMEBODY SAY P A P I")
             else:
                 print("Message dropped, not a command")
             
