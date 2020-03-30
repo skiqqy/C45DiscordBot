@@ -28,7 +28,7 @@ class MyClient(discord.Client):
             guilds.append(guild)
         c45 = guilds[0]
         channels = await c45.fetch_channels()
-        banter = Nonescore_message_sentiment
+        banter = None
         for channel in channels:
             if channel.id==615645678147862538:
                 banter = channel
