@@ -32,6 +32,7 @@ async def add_emoji(message, emoji):
 def sendIRC(channel, message):
     chan = "#" + str(channel)
     server.join(chan)
+    server.topic(chan, "CLUB45 bot is ?LOST?")
     print(chan)
     if message.content != "":
         server.privmsg(chan, "[" + str(message.author) + "]: " + message.content)
@@ -44,6 +45,7 @@ def sendIRC(channel, message):
 
 
 class MyClient(discord.Client):
+    
     async def on_ready(self):
         print('Logged on as', self.user)
         guilds = []
@@ -59,6 +61,12 @@ class MyClient(discord.Client):
         if message.channel.id == 679599402935123968:
             return
         print(message.reactions)
+
+        import discord
+        if message.type == discord.MessageType.new_member:
+            await message.channel.send("https://toot.aquilenet.fr/system/accounts/avatars/000/027/478/original/92ec832ba0fbfd74.png?1578998921")
+            await message.channel.send("welcome to da house, my bro.")
+            return
 
 
         if os.getenv("bot_irc") == "1":
