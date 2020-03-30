@@ -11,6 +11,20 @@ def startServer(path : String)
 	print("Starting UNIX domain socket server on \"" + path + "\"...\n");
 
 	socket = Socket.new(Socket::Family::UNIX, Socket::Type::RAW);
+	socket.bind(Socket::UNIXAddress.new(path))
+
+	while true
+		print("Waiting for a datagram to arrive...\n");
+
+		# No peak mode so we have a size datagram, we read 4 bytes
+		# Size will be interpreted as Int via little-endian decoding
+		# (and therefore encoding on the client side (Python))
+		datagramMessageSizeBytes = Slice(UInt8).new(4);
+		
+		
+		
+		print("Datagram arrived and cycle finished.\n");
+	end
 end
 
-startServer("listen.sock")
+startServer("./listen.sock")
