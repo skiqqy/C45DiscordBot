@@ -9,6 +9,7 @@ import discord
 from discord.ext import commands
 import os
 import subprocess
+import random
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -44,7 +45,9 @@ class MyClient(discord.Client):
                 await message.channel.send("UWU DID SOMEBODY SAY P A P I")
             elif "triggered" in message.content.lower():
                 fl = open("./resources/triggered.lol","r")
-                await message.channel.send(fl.read())
+                msg = fl.readlines()
+                index = random.randint(0,len(msg)-1)
+                await message.channel.send(msg[index])
             elif message.content.startswith(">"):
                 # Remove the `>`
                 command = message.content[1:].strip()
