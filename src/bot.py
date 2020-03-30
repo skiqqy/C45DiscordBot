@@ -42,6 +42,9 @@ class MyClient(discord.Client):
                 await message.channel.send("?")
             elif "papi" in message.content.lower():
                 await message.channel.send("UWU DID SOMEBODY SAY P A P I")
+            elif "triggered" in message.content.lower():
+                fl = open("./resources/triggered.lol","r")
+                await message.channel.send(fl.read())
             elif message.content.startswith(">"):
                 # Remove the `>`
                 command = message.content[1:].strip()
