@@ -33,3 +33,5 @@ def number_to_emoji(score):
         return NINE
     elif score == 10:
         return TEN
+
+troll_emojis = ["🅱️", "🍆", "🍑️", "😹️", "😏️", "💩️", "🤪️"]
