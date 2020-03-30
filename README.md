@@ -8,7 +8,7 @@ Proprietary™ c45 discord bot.
 Also, you must create a token, and save it in the file `token.secret` in the
 root of the cloned directory.
 
-A token can be created at [link](https://discordapp.com/developers/applications)
+A token can be created [at](https://discordapp.com/developers/applications)
 If you dont, the bot will not work, if you dont know how to create a token,
 please go read up ubout discord bot tokens.
 
