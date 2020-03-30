@@ -86,17 +86,11 @@ class MyClient(discord.Client):
                 elif command == "brink":
                     await message.channel.send("EXACTLY - Old Khaki.com")
                 elif command == "help":
-                    msg = "C45 Bot help menu\n\
-                            Commands\n\
-                            * ls        -> list directory\n\
-                            * fetch     -> get html of a website\n\
-                            * brink     -> c:\n\
-                            * ip:route  -> description needed\n\
-                            * ip:if     -> description needed\n\
-                            * ip:arp    -> description needed\n\
-                            * ip:ping   -> description needed\n\
-                            * ip:trace  -> description needed\n\
-                            * fetch     -> description needed\n"
+                    f = open("./resources/help.menu");
+                    strings = f.readlines()
+                    msg = ""
+                    for s in strings:
+                        msg += s
                     await message.channel.send(msg)
             else:
                 print("Message dropped, not a command")
