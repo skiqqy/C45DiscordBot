@@ -10,6 +10,14 @@ from discord.ext import commands
 import os
 import subprocess
 import random
+import emojis
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+analyser = SentimentIntensityAnalyzer()
+
+async def score_message_sentiment(sentence):
+    score = int(analyser.polarity_scores(sentence) * 10)
+    return emojis.number_to_emoji(score)
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -20,7 +28,7 @@ class MyClient(discord.Client):
             guilds.append(guild)
         c45 = guilds[0]
         channels = await c45.fetch_channels()
-        banter = None
+        banter = Nonescore_message_sentiment
         for channel in channels:
             if channel.id==615645678147862538:
                 banter = channel
@@ -33,6 +41,7 @@ class MyClient(discord.Client):
         print(message.reactions)
         await message.add_reaction("🅱️")
         await message.add_reaction("🍆")
+        await message.add_reaction(score_message_sentiment(message))
         
         # Ignore messages from the bot
         if message.author == self.user:
