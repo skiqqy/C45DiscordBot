@@ -43,13 +43,27 @@ class MyClient(discord.Client):
         if message.channel.id == 679599402935123968:
             return
         print(message.reactions)
-        await add_emoji(message, random.choice(emojis.troll_emojis))
+        
         await add_emoji(message, score_message_sentiment(message.content))
         
         # Ignore messages from the bot
         if message.author == self.user:
             return
+        elif "brink" in str(message.author).lower():
+            await add_emoji(message, "🅱️")
+            await add_emoji(message, "🇷")
+            await add_emoji(message, "ℹ️")
+            await add_emoji(message, "🇳")
+            await add_emoji(message, "🇰")
+            await message.channel.send("Thank you Brink, very cool!")
         else:
+            await add_emoji(message, random.choice(emojis.troll_emojis))
+            # Other user-specific messages
+            if "bigdatadave" in str(message.author).lower():
+                await add_emoji(message, "🅱️")
+                await add_emoji(message, "ℹ️")
+                await add_emoji(message, "🇬")
+                await add_emoji(message, "📊")
             # Messages from everyone else
             if "test" in message.content.lower():
                 # get the id
