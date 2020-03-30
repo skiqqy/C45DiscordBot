@@ -20,6 +20,12 @@ async def score_message_sentiment(sentence):
     score = int(analyser.polarity_scores(sentence)['compound'] * 10)
     return emojis.number_to_emoji(score)
 
+async def add_emoji(message, emoji):
+    try:
+        message.add_reaction(random.choice(emojis.troll_emojis))
+    except Exception as e:
+        print(str(e))
+
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as', self.user)
@@ -39,11 +45,10 @@ class MyClient(discord.Client):
        
 
     async def on_message(self, message):
-
-        
         print(message.reactions)
-        await message.add_reaction(random.choice(emojis.troll_emojis))
-        await message.add_reaction(score_message_sentiment(message))
+
+        add_emoji(random.choice(emojis.troll_emojis))
+        add_emoji(score_message_sentiment(message))
         
         # Ignore messages from the bot
         if message.author == self.user:
