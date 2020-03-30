@@ -16,7 +16,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyser = SentimentIntensityAnalyzer()
 
 async def score_message_sentiment(sentence):
-    score = int(analyser.polarity_scores(sentence) * 10)
+    score = int(analyser.polarity_scores(sentence)['compound'] * 10)
     return emojis.number_to_emoji(score)
 
 class MyClient(discord.Client):
