@@ -44,7 +44,7 @@ class MyClient(discord.Client):
             return
         print(message.reactions)
         await add_emoji(message, random.choice(emojis.troll_emojis))
-        await add_emoji(message, score_message_sentiment(message))
+        await add_emoji(message, score_message_sentiment(message.content))
         
         # Ignore messages from the bot
         if message.author == self.user:
