@@ -49,13 +49,6 @@ class MyClient(discord.Client):
         # Ignore messages from the bot
         if message.author == self.user:
             return
-        elif "brink" in str(message.author).lower():
-            await add_emoji(message, "🅱️")
-            await add_emoji(message, "🇷")
-            await add_emoji(message, "ℹ️")
-            await add_emoji(message, "🇳")
-            await add_emoji(message, "🇰")
-            await message.channel.send("Thank you Brink, very cool!")
         else:
             await add_emoji(message, random.choice(emojis.troll_emojis))
             # Other user-specific messages
@@ -64,6 +57,13 @@ class MyClient(discord.Client):
                 await add_emoji(message, "ℹ️")
                 await add_emoji(message, "🇬")
                 await add_emoji(message, "📊")
+            elif "brink" in str(message.author).lower():
+                await add_emoji(message, "🅱️")
+                await add_emoji(message, "🇷")
+                await add_emoji(message, "ℹ️")
+                await add_emoji(message, "🇳")
+                await add_emoji(message, "🇰")
+                await message.channel.send("Thank you Brink, very cool!")
             # Messages from everyone else
             if "test" in message.content.lower():
                 # get the id
