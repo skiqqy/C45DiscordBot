@@ -22,9 +22,9 @@ async def score_message_sentiment(sentence):
 
 async def add_emoji(message, emoji):
     try:
-        message.add_reaction(random.choice(emojis.troll_emojis))
+        message.add_reaction(emoji)
     except Exception as e:
-        print(str(e))
+        print("Bruh:", str(e))
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -43,13 +43,8 @@ class MyClient(discord.Client):
         if message.channel.id == 679599402935123968:
             return
         print(message.reactions)
-        try:
-            await add_emoji(random.choice(emojis.troll_emojis))
-            await add_emoji(score_message_sentiment(message))
-        except Exception:
-            print("bruhf")
-
-        
+        await add_emoji(message, random.choice(emojis.troll_emojis))
+        await add_emoji(message, score_message_sentiment(message))
         
         # Ignore messages from the bot
         if message.author == self.user:
