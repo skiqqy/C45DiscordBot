@@ -27,6 +27,8 @@ def exec_command(command):
         return subprocess.getoutput("ifconfig")
     elif command.lower() == "ip:arp":
         return subprocess.getoutput("arp")
+    elif command.lower() == "ip:neigh":
+        return subprocess.getoutput("ip neigh")
     elif command.startswith("ls"):
         dirLS = command[2:]
         return subprocess.getoutput("ls " + dirLS)
