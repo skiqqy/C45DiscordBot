@@ -20,6 +20,10 @@ def startServer(path : String)
 		# Size will be interpreted as Int via little-endian decoding
 		# (and therefore encoding on the client side (Python))
 		datagramMessageSizeBytes = Slice(UInt8).new(4);
+		print(UInt8.to_s()+"\n");
+		print(UInt8.class.to_s()+"\n");
+		size = IO::ByteFormat::LittleEndian.decode(UInt32, datagramMessageSizeBytes)
+		print("Next datagram size to be: " + size.to_s() + "\n");
 		
 		
 		
