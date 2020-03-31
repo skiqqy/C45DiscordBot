@@ -5,7 +5,7 @@ Please note, we are aware that the menu looks aids, we are fixing it
 * `ls`        -> list directory
 * `fetch`     -> get html of a website
 * `brink`     -> c:
-* `python3`   -> run a python3 intepreter (only one liners currently): >python3 2**3
+* `python3`   -> run a python3 intepreter (use a \ for multiline code): >python3 2**3
 * `exec`      -> run unix commands (currently being worked on for safety)
 * `ip:route`  -> display's route to website: >ip:route www.google.com
 * `ip:if`     -> description needed
