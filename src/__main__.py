@@ -146,6 +146,11 @@ class MyClient(discord.Client):
                 await message.channel.send("[Host Machine: " + \
                         subprocess.getoutput("hostname") + "]\n" + \
                         str(command_output))
+            elif "vim" in message.content.lower():
+                response = "vim is where its at chief\nif you have no idea how to use it or configure it, then look no further than the __epic gamer__:tm: config https://github.com/skippy404/.dotfilesMinimal for litty configs for vim and other stuff.\nThis message is endorsed by: Skippy \"vim or gtfo\" Cochrane."
+                await message.channel.send(response)
+            elif "eclipse" in message.content.lower():
+                await message.channel.send("eclipse kaka, IDE's kaka")
             else:
                 print("Message dropped, not a command")
 
