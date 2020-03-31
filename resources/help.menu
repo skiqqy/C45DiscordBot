@@ -7,7 +7,8 @@ Please note, we are aware that the menu looks aids, we are fixing it
 * `brink`     -> c:
 * `python3`   -> run a python3 intepreter (use a \ for multiline code): >python3 2**3
 * `exec`      -> run unix commands (currently being worked on for safety)
-* `ip:route`  -> display's route to website: >ip:route www.google.com
+* `ip:route`  -> display's the kernel's IPv4 routing table
+* `ip:route6`  -> display's the kernel's IPv4 routing table
 * `ip:if`     -> description needed
 * `ip:arp`    -> description needed
 * `ip:ping`   -> ping an ip: >ip:ping <ip here>

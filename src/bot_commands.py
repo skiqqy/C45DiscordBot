@@ -21,6 +21,8 @@ def exec_command(command):
             return "For safety, this command cannot be run"
     elif command.lower() == "ip:route":
         return subprocess.getoutput("route")
+    elif command.lower() == "ip:route6":
+        return subprocess.getoutput("route -6")
     elif command.lower() == "ip:if":
         return subprocess.getoutput("ifconfig")
     elif command.lower() == "ip:arp":
