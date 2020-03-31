@@ -2,18 +2,19 @@ __C45 Bot help menu ( ͡° ͜ʖ ͡°)__
 Please note, we are aware that the menu looks aids, we are fixing it
 
 *Commands*
-* `ls`        -> list directory
-* `fetch`     -> get html of a website
-* `brink`     -> c:
-* `python3`   -> run a python3 intepreter (use a \ for multiline code): >python3 2**3
-* `exec`      -> run unix commands (currently being worked on for safety)
-* `ip:route`  -> display's the kernel's IPv4 routing table
-* `ip:route6`  -> display's the kernel's IPv4 routing table
-* `ip:if`     -> description needed
-* `ip:arp`    -> description needed
-* `ip:ping`   -> ping an ip: >ip:ping <ip here>
-* `ip:trace`  -> description needed
-* `fetch`     -> get html of website (slightly buggy): >fetch https://www.google.com/
+* `ls`          -> list directory
+* `fetch`       -> get html of a website
+* `brink`       -> c:
+* `python3`     -> run a python3 intepreter (use a \ for multiline code): >python3 2**3
+* `add_feature` -> submits a feature request: >add_feature please can you add music ty big brained devs
+* `exec`        -> run unix commands (currently being worked on for safety)
+* `ip:route`    -> displays the kernel's IPv4 routing table
+* `ip:route6`    -> displays the kernel's IPv6 routing table
+* `ip:if`       -> display network interfaces
+* `ip:arp`      -> display lladdr to networkaddr mappings
+* `ip:ping`     -> ping an ip: >ip:ping <ip here>
+* `ip:trace`    -> perform consecutive ttl increase
+* `fetch`       -> get html of website (slightly buggy): >fetch https://www.google.com/
 
 For enquires pm Stephen/Tristan/Dave.
 
