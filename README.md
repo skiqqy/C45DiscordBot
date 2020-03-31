@@ -1,5 +1,6 @@
 # C45DiscordBot
 Proprietary™ c45 discord bot.
+
 [![Build Status](https://travis-ci.com/Skippy404/C45DiscordBot.svg?branch=master)](https://travis-ci.com/Skippy404/C45DiscordBot)
 
 ## Using the bot (aka master branch)
