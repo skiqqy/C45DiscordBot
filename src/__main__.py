@@ -43,7 +43,7 @@ def sendIRC(channel, message):
         i = 0
         for attach in message.attachments:
             print(attach)
-            server.privmsg("#club45", "[" + str(message.author) + "]: Attachment " + str(i) + ":" + str(attach.url))
+            server.privmsg(chan, "[" + str(message.author) + "]: Attachment " + str(i) + ":" + str(attach.url))
             i += 1
 
 class MyClient(discord.Client):
