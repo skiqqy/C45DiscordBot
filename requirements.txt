@@ -1,4 +1,5 @@
-discord.py
+discord
+requests
 vaderSentiment
 moduleLoader
 irc
