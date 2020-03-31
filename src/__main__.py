@@ -7,7 +7,7 @@
 # * Welcome messgaes and role assignment
 import os
 import random
-
+import subprocess
 import discord
 import irc.client
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -143,7 +143,7 @@ class MyClient(discord.Client):
                 command = message.content[1:].strip()
                 print("Got command: \"" + command + "\"")
                 command_output = bot_commands.exec_command(command)
-                await message.channel.send(command_output)
+                await message.channel.send("[" + subprocess.getoutput("hostname") + "]\n" + command_output)
             else:
                 print("Message dropped, not a command")
 
