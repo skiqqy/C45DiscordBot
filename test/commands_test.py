@@ -1,4 +1,4 @@
-from c45bot.bot_commands import *
+from src.bot_commands import *
 import unittest
 
 
