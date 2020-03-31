@@ -1,5 +1,6 @@
 token.secret
 __pycache__
+features.txt
 
 # IDE files
 .idea

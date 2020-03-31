@@ -47,5 +47,13 @@ def exec_command(command):
         for s in strings:
             msg += s
         return msg
+    elif command.startswith("add_feature"):
+        line = command[12:]
+        print("adding feature: " + line)
+        f = open("./resources/features.txt","a")
+        f.write(str(line + "\n"));
+        f.close()
+        return "feature request recorded"
     else:
         print("\"" + str(command) + "\"" + " released, not a valid command")
+        return "Not a command you chop"
