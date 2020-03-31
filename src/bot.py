@@ -29,20 +29,13 @@ server.join("#club45")
 
 def score_message_sentiment(sentence):
     score = int(analyser.polarity_scores(sentence)['compound'] * 10)
-    return emojis.number_to_emoji(score)
+    return emojis.number_emojis[score]
 
 async def add_emoji(message, emoji):
     try:
         await message.add_reaction(emoji)
     except Exception as e:
         print("Bruh:", str(e))
-
-
-
-
-
-
-
 
 def sendIRC(channel, message):
     chan = "#"+str(channel)

@@ -10,28 +10,6 @@ EIGHT = "8⃣"
 NINE = "9⃣"
 TEN = "🔟"
 
-def number_to_emoji(score):
-    if score == 0:
-        return ZERO
-    elif score == 1:
-        return ONE
-    elif score == 2:
-        return TWO
-    elif score == 3:
-        return THREE
-    elif score == 4:
-        return FOUR
-    elif score == 5:
-        return FIVE
-    elif score == 6:
-        return SIX
-    elif score == 7:
-        return SEVEN
-    elif score == 8:
-        return EIGHT
-    elif score == 9:
-        return NINE
-    elif score == 10:
-        return TEN
+number_emojis = [ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN]
 
 troll_emojis = ["🅱️", "🍆", "🍑", "😹", "😏", "💩", "🤪"]
