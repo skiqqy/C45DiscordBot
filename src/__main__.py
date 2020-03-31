@@ -28,21 +28,23 @@ async def add_emoji(message, emoji):
     except Exception as e:
         print("Bruh:", str(e))
 
-
 def sendIRC(channel, message):
     chan = "#" + str(channel)
     server.join(chan)
     server.topic(chan, "CLUB45 bot is ?LOST?")
-    print(chan)
+
+    # Send message(s)
     if message.content != "":
-        server.privmsg(chan, "[" + str(message.author) + "]: " + message.content)
+        for send in message.content.split("."):
+            server.privmsg(chan, "[" + str(message.author) + "]: " + send)
+
+    # Send attachment URLs if there are some
     if len(message.attachments) > 0:
         i = 0
         for attach in message.attachments:
             print(attach)
             server.privmsg("#club45", "[" + str(message.author) + "]: Attachment " + str(i) + ":" + str(attach.url))
             i += 1
-
 
 class MyClient(discord.Client):
     
@@ -72,12 +74,13 @@ class MyClient(discord.Client):
         if os.getenv("bot_irc") == "1":
             try:
                 sendIRC(message.channel, message)
-            except Exception:
+            except Exception as e:
                 try:
                     server.connect("192.168.1.121", 6667, "c45_bot")
                 except:
                     print("Reconnect failed")
                 print("Failed to send IRC")
+                print(e)
 
         # moduleLoader.loadModules("on_message")
 

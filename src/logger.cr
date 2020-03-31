@@ -7,11 +7,15 @@
 
 require "socket"
 
-def startServer(path : String)
-	print("Starting UNIX domain socket server on \"" + path + "\"...\n");
+def startServer(port : UInt16)
+	print("Starting UNIX domain socket server on \"" + port.to_s() + "\"...\n");
 
-	socket = Socket.new(Socket::Family::UNIX, Socket::Type::RAW);
-	socket.bind(Socket::UNIXAddress.new(path))
+	socket = Socket.new(Socket::Family::INET, Socket::Type::STREAM, Socket::Protocol::TCP, blocking = true);
+	socket.bind("0.0.0.0", port);
+	socket.listen();
+	client = socket.accept();
+	print(client.blocking().to_s());
+	print(client.family().to_s());
 
 	while true
 		print("Waiting for a datagram to arrive...\n");
@@ -22,13 +26,16 @@ def startServer(path : String)
 		datagramMessageSizeBytes = Slice(UInt8).new(4);
 		print(UInt8.to_s()+"\n");
 		print(UInt8.class.to_s()+"\n");
+		
+		client.receive(datagramMessageSizeBytes);
 		size = IO::ByteFormat::LittleEndian.decode(UInt32, datagramMessageSizeBytes)
 		print("Next datagram size to be: " + size.to_s() + "\n");
-		
-		
-		
+
+		messageBytes = Slice(UInt8).new(size);
+		client.receive(messageBytes);
+
 		print("Datagram arrived and cycle finished.\n");
 	end
 end
 
-startServer("./listen.sock")
+startServer(2000)
