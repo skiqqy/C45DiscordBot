@@ -9,4 +9,4 @@ python:
 before_install:
   - pip3 install -r requirements.txt
 
-script: python3 -m unittest discover -s test -p '*_test.py'
+script: ./test.sh
