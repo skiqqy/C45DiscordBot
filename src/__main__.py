@@ -12,7 +12,7 @@ import discord
 import irc.client
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-from c45bot import emojis, bot_commands
+import emojis, bot_commands
 
 analyser = SentimentIntensityAnalyzer()
 
@@ -58,7 +58,7 @@ class MyClient(discord.Client):
             return
         print(message.reactions)
 
-        sendIRC(message.channel, message)
+        #sendIRC(message.channel, message)
 
         # moduleLoader.loadModules("on_message")
 
@@ -114,10 +114,10 @@ class MyClient(discord.Client):
 
 if __name__ == "__main__":
     # Create a client
-    client = irc.client.Reactor()
-    server = client.server()
-    server.connect("192.168.1.121", 6667, "c45_bot")
-    server.join("#club45")
+    #client = irc.client.Reactor()
+    #server = client.server()
+    #server.connect("192.168.1.121", 6667, "c45_bot")
+    #server.join("#club45")
 
     client = MyClient()
     client.run(os.getenv("C45_Token"))
