@@ -10,11 +10,9 @@ import random
 
 import discord
 import irc.client
-from discord.ext import commands
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-import c45bot.bot_commands
-import c45bot.emojis
+from c45bot import emojis, bot_commands
 
 analyser = SentimentIntensityAnalyzer()
 
@@ -33,7 +31,14 @@ async def add_emoji(message, emoji):
 
 def sendIRC(channel, message):
     chan = "#" + str(channel)
-    server.privmsg("#club45", "[" + str(message.author) + "]: " + message.content)
+    if message.content != "":
+        server.privmsg("#club45", "[" + str(message.author) + "]: " + message.content)
+    if len(message.attachments) > 0:
+        i = 0
+        for attach in message.attachments:
+            print(attach)
+            server.privmsg("#club45", "[" + str(message.author) + "]: Attachment " + str(i) + ":" + str(attach.url))
+            i += 1
 
 
 class MyClient(discord.Client):
@@ -101,7 +106,7 @@ class MyClient(discord.Client):
                 # Remove the `>`
                 command = message.content[1:].strip()
                 print("Got command: \"" + command + "\"")
-                command_output = commands.exec_command(command)
+                command_output = bot_commands.exec_command(command)
                 await message.channel.send(command_output)
             else:
                 print("Message dropped, not a command")
