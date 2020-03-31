@@ -6,10 +6,19 @@ def exec_command(command):
     if command.startswith("exec"):
         cmd = command[4:]
         print("Exec: " + str(cmd))
-        return subprocess.getoutput(cmd)
-    elif command.startswith("eval"):
-        cmad = command[4:]
-        return eval(cmad)
+        #return subprocess.getoutput(cmd)
+        return "Exec is down, changes being made."
+    elif command.startswith("python3"):
+        cmad = command[7:]
+        if (cmad.find("os") == -1 and \
+            cmad.find("subprocess") == -1 and \
+            cmad.find("open(") == -1):
+            try:
+                return eval(cmad)
+            except:
+                return "error in eval"
+        else:
+            return "For safety, this command cannot be run"
     elif command.lower() == "ip:route":
         return subprocess.getoutput("route")
     elif command.lower() == "ip:if":
@@ -38,3 +47,5 @@ def exec_command(command):
         for s in strings:
             msg += s
         return msg
+    else:
+        print("\"" + str(command) + "\"" + " released, not a valid command")
