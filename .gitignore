@@ -1,2 +1,7 @@
 token.secret
 __pycache__
+
+# IDE files
+.idea
+*.iml
+.vscode
