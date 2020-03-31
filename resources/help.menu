@@ -1,14 +1,20 @@
 __C45 Bot help menu ( ͡° ͜ʖ ͡°)__
-https://github.com/Skippy404/C45DiscordBot
+Please note, we are aware that the menu looks aids, we are fixing it
+
 *Commands*
 * `ls`        -> list directory
 * `fetch`     -> get html of a website
 * `brink`     -> c:
-* `ip:route`  -> description needed
+* `python3`   -> run a python3 intepreter (use a \ for multiline code): >python3 2**3
+* `exec`      -> run unix commands (currently being worked on for safety)
+* `ip:route`  -> display's route to website: >ip:route www.google.com
 * `ip:if`     -> description needed
 * `ip:arp`    -> description needed
-* `ip:ping`   -> description needed
+* `ip:ping`   -> ping an ip: >ip:ping <ip here>
 * `ip:trace`  -> description needed
-* `fetch`     -> description needed
+* `fetch`     -> get html of website (slightly buggy): >fetch https://www.google.com/
 
 For enquires pm Stephen/Tristan/Dave.
+
+__To view Source code/ submit requests/ bugs go to:__
+https://github.com/Skippy404/C45DiscordBot
