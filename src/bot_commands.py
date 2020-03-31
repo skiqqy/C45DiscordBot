@@ -21,6 +21,10 @@ def exec_command(command):
             return "For safety, this command cannot be run"
     elif command.lower() == "ip:route":
         return subprocess.getoutput("route")
+    elif command.lower() == "wall":
+        msg = command[4:]
+        subprocess.getoutput("wall " + msg)
+        return "Done tty (titty)"
     elif command.lower() == "ip:route6":
         return subprocess.getoutput("route -6")
     elif command.lower() == "ip:if":
@@ -35,6 +39,9 @@ def exec_command(command):
     elif command.lower().startswith("ip:ping"):
         ip = command[7:]
         return subprocess.getoutput("ping " + ip + " -c 3")
+    elif command.lower().startswith("ip:arping"):
+        ip = command[9:]
+        return subprocess.getoutput("arping -c 3 " + ip)
     elif command.lower().startswith("ip:trace"):
         ip = command[8:]
         return subprocess.getoutput("traceroute " + ip)
