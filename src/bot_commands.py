@@ -7,12 +7,6 @@ from __init__ import cfg
 
 
 def exec_command(command):
-    # Find the associated plugin
-    plugin = plugins.find_plugin(command)
-    if plugin is not None:
-        message = plugin.exec(command)
-        return message
-
     if command.startswith("exec"):
         cmd = command[4:]
         print("Exec: " + str(cmd))
@@ -76,5 +70,11 @@ def exec_command(command):
         f.close()
         return "feature request recorded"
     else:
-        print("\"" + str(command) + "\"" + " released, not a valid command")
-        return "Not a command you chop"
+         # Find the associated plugin
+        plugin = plugins.find_plugin(command)
+        if plugin is not None:
+            message = plugin.exec(command)
+            return message
+        else:
+            print("\"" + str(command) + "\"" + " released, not a valid command")
+            return "Not a command you chop"
