@@ -44,8 +44,8 @@ def exec_command(command):
     elif command.lower() == "ip:neigh":
         return subprocess.getoutput("ip neigh")
     elif command.startswith("ls"):
-        dirLS = command[2:]
-        return subprocess.getoutput("ls " + dirLS)
+        dir_ls = command[2:]
+        return subprocess.getoutput("ls " + dir_ls)
     elif command.lower().startswith("ip:ping"):
         ip = command[7:]
         return subprocess.getoutput("ping " + ip + " -c 3")
