@@ -21,7 +21,7 @@ def initSettings():
     file = open("bot.config", "r")
     jsonContents = file.read()
     file.close()
-    jsonConfig = json.loads(jsonContents)
+    globals()['jsonConfig'] = json.loads(jsonContents)
 
 
 def score_message_sentiment(sentence):
@@ -164,7 +164,7 @@ class MyClient(discord.Client):
 
 if __name__ == "__main__":
     initSettings()
-    if os.getenv("bot_irc") == "1":
+    if jsonConfig["enableIRC"] == "1":
         try:
             # Create a client
             client = irc.client.Reactor()
