@@ -4,7 +4,7 @@ import subprocess
 import discord
 import irc.client
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
+import plugins
 import emojis
 import bot_commands
 from __init__ import cfg
@@ -154,8 +154,11 @@ class MyClient(discord.Client):
                 print("Message dropped, not a command")
 
 if __name__ == "__main__":
-    if not os.path.isfile("../resources/config.yml"):
+    if not os.path.isfile("resources/config.yml"):
         print("No configuration file found! See README.md.")
+
+    # Preload plugins
+    plugins.load(cfg)
 
     try:
         if cfg["irc"]["enabled"]:

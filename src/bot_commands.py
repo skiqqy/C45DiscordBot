@@ -1,3 +1,4 @@
+
 import subprocess
 import requests
 import plugins
@@ -7,7 +8,7 @@ from __init__ import cfg
 
 def exec_command(command):
     # Find the associated plugin
-    plugin = plugins.find_plugin(cfg, command)
+    plugin = plugins.find_plugin(command)
     if plugin is not None:
         message = plugin.exec(command)
         return message
