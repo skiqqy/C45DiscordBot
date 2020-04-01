@@ -164,13 +164,14 @@ class MyClient(discord.Client):
 
 if __name__ == "__main__":
     initSettings()
-    if jsonConfig["enableIRC"] == "1":
-        try:
+    if jsonConfig["ircSettings"]["enableIRC"] == "1":
+        try:        
             # Create a client
             client = irc.client.Reactor()
             server = client.server()
-            server.connect("192.168.1.121", 6667, "c45_bot")
-            server.join("#club45")
+            server.connect(jsonConfig["ircSettings"]["serverAddress"], jsonConfig["ircSettings"]["serverPort"], jsonConfig["ircSettings"]["nick"])
+        except KeyError as e:
+            print("Configuration error: " + str(e))
         except Exception:
             print("Error connecting IRC")
 
