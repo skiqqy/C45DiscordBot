@@ -11,10 +11,17 @@ import subprocess
 import discord
 import irc.client
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import json
 
 import emojis, bot_commands
 
 analyser = SentimentIntensityAnalyzer()
+
+def initSettings():
+    file = open("bot.config", "r")
+    jsonContents = file.read()
+    file.close()
+    jsonConfig = json.loads(jsonContents)
 
 
 def score_message_sentiment(sentence):
@@ -156,6 +163,7 @@ class MyClient(discord.Client):
 
 
 if __name__ == "__main__":
+    initSettings()
     if os.getenv("bot_irc") == "1":
         try:
             # Create a client
