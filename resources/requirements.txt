@@ -3,3 +3,4 @@ requests
 vaderSentiment
 moduleLoader
 irc
+PyYAML
