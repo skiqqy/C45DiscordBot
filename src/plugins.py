@@ -24,5 +24,5 @@ def find_plugin(command_string):
     for plugin in preloaded_plugins:
         plugin_name = list(plugin[1].keys())[0]
         print(plugin[1][plugin_name])
-        if plugin[1][plugin_name]["command"] == command_string:
+        if plugin[1][plugin_name]["command"] == command_string and plugin[1][plugin_name]["enabled"]:
             return plugin[0]
