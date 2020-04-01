@@ -22,6 +22,7 @@ def initSettings():
     jsonContents = file.read()
     file.close()
     globals()['jsonConfig'] = json.loads(jsonContents)
+    bot_commands.config = globals()['jsonConfig']
 
 
 def score_message_sentiment(sentence):
@@ -160,7 +161,6 @@ class MyClient(discord.Client):
                 await message.channel.send("eclipse kaka, IDE's kaka")
             else:
                 print("Message dropped, not a command")
-
 
 if __name__ == "__main__":
     initSettings()

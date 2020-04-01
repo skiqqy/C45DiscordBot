@@ -1,8 +1,16 @@
 import subprocess
 import requests
-
+import plugins
 
 def exec_command(command):
+    # Find the associated plugin
+    plugin = plugins.findPlugin(config, command)
+    if plugin != None:
+        message = plugin.exec(command)
+        return message
+    else:
+        return "Ek weet nie wat daai is nie"
+
     if command.startswith("exec"):
         cmd = command[4:]
         print("Exec: " + str(cmd))
