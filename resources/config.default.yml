@@ -7,8 +7,22 @@ irc:
 token:
   secret: secret_here
 
+plugins:
+  - ping-pong:
+	  file: ping
+	  enabled: false
+	  command: ping
+#  - next_plugin:
+#      file: name
+#      enabled: bool
+#      command: command
+
 acl:
   admins:
     - username#1234
 #  role_name_here:
 #    - username#1234
+
+#guilds:
+#  ignore:
+#    - guild_name

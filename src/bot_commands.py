@@ -1,18 +1,25 @@
 import subprocess
 import requests
-
+import plugins
+from __init__ import cfg
 
 def exec_command(command):
+    # Find the associated plugin
+    plugin = plugins.findPlugin(cfg, command)
+    if plugin is not None:
+        message = plugin.exec(command)
+        return message
+
     if command.startswith("exec"):
         cmd = command[4:]
         print("Exec: " + str(cmd))
-        #return subprocess.getoutput(cmd)
+        # return subprocess.getoutput(cmd)
         return "Exec is down, changes being made."
     elif command.startswith("python3"):
         cmad = command[7:]
-        if (cmad.find("os") == -1 and \
-            cmad.find("subprocess") == -1 and \
-            cmad.find("open(") == -1):
+        if (cmad.find("os") == -1 and
+                cmad.find("subprocess") == -1 and
+                cmad.find("open(") == -1):
             try:
                 return eval(cmad)
             except:
@@ -61,7 +68,7 @@ def exec_command(command):
     elif command.startswith("add_feature"):
         line = command[12:]
         print("adding feature: " + line)
-        f = open("./resources/features.txt","a")
+        f = open("./resources/features.txt", "a")
         f.write(str(line + "\n"));
         f.close()
         return "feature request recorded"
