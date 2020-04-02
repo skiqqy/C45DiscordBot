@@ -3,11 +3,13 @@ import random
 import subprocess
 import discord
 import irc.client
+import yaml
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 from src import emojis, bot_commands
 
 analyser = SentimentIntensityAnalyzer()
+cfg = None
 
 
 def score_message_sentiment(sentence):
@@ -154,15 +156,17 @@ class MyClient(discord.Client):
 
 
 if __name__ == "__main__":
+    with open("../resources/config.yml", "r") as ymlfile:
+        cfg = yaml.load(ymlfile)
     if os.getenv("bot_irc") == "1":
         try:
             # Create a client
             client = irc.client.Reactor()
             server = client.server()
-            server.connect("192.168.1.121", 6667, "c45_bot")
+            server.connect(cfg["irc"]["hostname"], int(cfg["irc"]["port"]), cfg["irc"]["nickname"])
             server.join("#club45")
         except Exception:
             print("Error connecting IRC")
 
     client = MyClient()
-    client.run(os.getenv("C45_Token"))
+    client.run(cfg["token"]["secret"])
