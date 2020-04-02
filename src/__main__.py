@@ -6,7 +6,9 @@ import irc.client
 import yaml
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-from src import emojis, bot_commands
+#from src import emojis, bot_commands
+import emojis
+import bot_commands
 
 analyser = SentimentIntensityAnalyzer()
 cfg = None
@@ -156,9 +158,9 @@ class MyClient(discord.Client):
 
 
 if __name__ == "__main__":
-    if not os.path.isfile("../resources/config.yml"):
+    if not os.path.isfile("./resources/config.yml"):
         print("No configuration file found! See README.md.")
-    with open("../resources/config.yml", "r") as ymlfile:
+    with open("./resources/config.yml", "r") as ymlfile:
         cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
     try:
