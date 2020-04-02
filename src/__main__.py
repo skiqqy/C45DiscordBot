@@ -1,10 +1,3 @@
-##C45 Bot for the c45 discord server
-# TODO:
-# * Add functionality to access bnet
-# * Add functionality to host files
-# * Add functionality to play songs
-# * Add reminders (bot will message if something is due)
-# * Welcome messgaes and role assignment
 import os
 import random
 import subprocess
@@ -12,7 +5,7 @@ import discord
 import irc.client
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-import emojis, bot_commands
+from src import emojis, bot_commands
 
 analyser = SentimentIntensityAnalyzer()
 
@@ -28,7 +21,8 @@ async def add_emoji(message, emoji):
     except Exception as e:
         print("Bruh:", str(e))
 
-def sendIRC(channel, message):
+
+def send_irc(channel, message):
     chan = "#" + str(channel)
     server.join(chan)
     server.topic(chan, "CLUB45 bot is ?LOST?")
@@ -46,8 +40,9 @@ def sendIRC(channel, message):
             server.privmsg(chan, "[" + str(message.author) + "]: Attachment " + str(i) + ":" + str(attach.url))
             i += 1
 
+
 class MyClient(discord.Client):
-    
+
     async def on_ready(self):
         print('Logged on as', self.user)
         guilds = []
@@ -66,14 +61,14 @@ class MyClient(discord.Client):
 
         import discord
         if message.type == discord.MessageType.new_member:
-            await message.channel.send("https://toot.aquilenet.fr/system/accounts/avatars/000/027/478/original/92ec832ba0fbfd74.png?1578998921")
+            await message.channel.send(
+                "https://toot.aquilenet.fr/system/accounts/avatars/000/027/478/original/92ec832ba0fbfd74.png?1578998921")
             await message.channel.send("welcome to da house, my bro.")
             return
 
-
         if os.getenv("bot_irc") == "1":
             try:
-                sendIRC(message.channel, message)
+                send_irc(message.channel, message)
             except Exception as e:
                 try:
                     server.connect("192.168.1.121", 6667, "c45_bot")
@@ -113,18 +108,18 @@ class MyClient(discord.Client):
                 await message.channel.send("Marks out")
                 await message.channel.send("?")
             elif message.content.lower()[:3] == "how":
-                messageWiggle=""
-                i=True
-                p=0
+                messageWiggle = ""
+                i = True
+                p = 0
                 for ch in message.content:
                     if i:
-                        messageWiggle+=ch.upper()
-                        i=False
+                        messageWiggle += ch.upper()
+                        i = False
                     else:
-                        messageWiggle+=ch.lower()
-                        i=True
+                        messageWiggle += ch.lower()
+                        i = True
                     print(messageWiggle)
-                    p+=1
+                    p += 1
                 await message.channel.send(messageWiggle)
             elif "papi" in message.content.lower():
                 await message.channel.send(random.choice([
@@ -144,10 +139,13 @@ class MyClient(discord.Client):
                 print("Got command: \"" + command + "\"")
                 command_output = bot_commands.exec_command(command)
                 await message.channel.send("[Host Machine: " + \
-                        subprocess.getoutput("hostname") + "]\n" + \
-                        str(command_output))
+                                           subprocess.getoutput("hostname") + "]\n" + \
+                                           str(command_output))
             elif "vim" in message.content.lower():
-                response = "vim is where its at chief\nif you have no idea how to use it or configure it, then look no further than the __epic gamer__:tm: config https://github.com/skippy404/.dotfilesMinimal for litty configs for vim and other stuff.\nThis message is endorsed by: Skippy \"vim or gtfo\" Cochrane."
+                response = "vim is where its at chief\nif you have no idea how to use it or configure it, then look " \
+                           "no further than the __epic gamer__:tm: config " \
+                           "https://github.com/skippy404/.dotfilesMinimal for litty configs for vim and other " \
+                           "stuff.\nThis message is endorsed by: Skippy \"vim or gtfo\" Cochrane. "
                 await message.channel.send(response)
             elif "eclipse" in message.content.lower():
                 await message.channel.send("eclipse kaka, IDE's kaka")
