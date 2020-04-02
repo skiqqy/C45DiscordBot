@@ -3,9 +3,10 @@ import requests
 import plugins
 from __init__ import cfg
 
+
 def exec_command(command):
     # Find the associated plugin
-    plugin = plugins.findPlugin(cfg, command)
+    plugin = plugins.find_plugin(cfg, command)
     if plugin is not None:
         message = plugin.exec(command)
         return message
@@ -69,7 +70,7 @@ def exec_command(command):
         line = command[12:]
         print("adding feature: " + line)
         f = open("./resources/features.txt", "a")
-        f.write(str(line + "\n"));
+        f.write(str(line + "\n"))
         f.close()
         return "feature request recorded"
     else:
