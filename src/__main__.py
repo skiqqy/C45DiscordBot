@@ -11,6 +11,7 @@ from __init__ import cfg
 
 analyser = SentimentIntensityAnalyzer()
 
+
 def score_message_sentiment(sentence):
     score = int(analyser.polarity_scores(sentence)['compound'] * 10)
     return emojis.number_emojis[score]
@@ -153,10 +154,8 @@ class MyClient(discord.Client):
             else:
                 print("Message dropped, not a command")
 
-if __name__ == "__main__":
-    if not os.path.isfile("../resources/config.yml"):
-        print("No configuration file found! See README.md.")
 
+if __name__ == "__main__":
     try:
         if cfg["irc"]["enabled"]:
             print("[INFO] Connecting to IRC server...")

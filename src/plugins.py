@@ -3,16 +3,17 @@
 # Modular plugin loader
 import importlib
 
-def findPlugin(config, commandString):
+
+def find_plugin(config, commandString):
 	try:
-		pluginsDirectory = config["plugins"]
+		plugins_directory = config["plugins"]
 		print("Found plugins")
-		plugins = pluginsDirectory.keys()
+		plugins = plugins_directory.keys()
 		print("Plugins available are: " + str(plugins))
 
 		for plugin in plugins:
-			if pluginsDirectory[plugin]["command"] == commandString:
-				return importlib.import_module("mods."+pluginsDirectory[plugin]["file"])
+			if plugins_directory[plugin]["command"] == commandString:
+				return importlib.import_module("mods." + plugins_directory[plugin]["file"])
 		else:
 			print("Invalid plugin")
 	except KeyError:
