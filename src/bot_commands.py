@@ -1,9 +1,6 @@
-
 import subprocess
 import requests
 from plugins import find_plugin
-
-from __init__ import cfg
 
 
 def exec_command(command):
@@ -70,11 +67,11 @@ def exec_command(command):
         f.close()
         return "feature request recorded"
     else:
-         # Find the associated plugin
-         plugin = find_plugin(command)
-        if plugin is not None:
-            message = plugin.exec(command)
-            return message
-        else:
-            print("\"" + str(command) + "\"" + " released, not a valid command")
-            return "Not a command you chop"
+        # Find the associated plugin
+        plugin = find_plugin(command)
+    if plugin is not None:
+        message = plugin.exec(command)
+        return message
+    else:
+        print("\"" + str(command) + "\"" + " released, not a valid command")
+        return "Not a command you chop"
