@@ -1,4 +1,4 @@
-from src.bot_commands import *
+from bot_commands import exec_command
 import unittest
 
 
@@ -18,8 +18,7 @@ class TestCommands(unittest.TestCase):
         self.assertEqual(line.strip(), "test")
 
     def test_invalid(self):
-        self.assertEqual(exec_command("not_a_command_i_promise"),
-                         "Not a command you chop")
+        self.assertEqual(exec_command("not_a_command_i_promise"), "Not a command you chop")
 
 
 if __name__ == '__main__':
