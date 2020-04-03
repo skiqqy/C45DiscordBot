@@ -5,12 +5,14 @@
 Check the issues under this repository's issue tracker.
 
 ## Making changes
-Before making a change, create a branch off of `master` with one of the following prefixes to describe it's purpose:
+Before making a change, create a branch off of `master` with one of the following prefixes to describe its purpose:
 * `feat/`: For adding a new feature.
 * `fix/`: For fixing a bug.
 * `refactor/`: For any architectural changes, moving or renaming files/directories.
 * `docs/`: For any purely documentation related changes
 * `ci/`: For any continuous integration additions or changes.
+
+Feel free to fork the project first and then do a pull request in a similar fashion.
 
 ## Git Commits
 The following [emojis](https://gitmoji.carloscuesta.me/) are to be prefixed with a short and concise commit title:
@@ -49,8 +51,13 @@ The following [emojis](https://gitmoji.carloscuesta.me/) are to be prefixed with
 Anything beyond 50 characters needs to be placed in the description in bullet form.
 
 ## Pull requests
+
+The heading of a pull request must relate to the issue you are solving. No emojis go into the PR. You may open your PR at
+any time to indicate that you are working on a certain issue and allow others to track your work, but if you are not ready
+to merge yet then add "WIP:" to the beginning of your title.
+
 Pull requests are to be used when merging your branch into `master`. If your branch is behind use the "Rebase and commit" option
-or simply "Merge and commit". We will not use "Squash and commit" as you should squash your commits inot a handful of meaningful ones
+or simply "Merge and commit". We will not use "Squash and commit" as you should squash your commits into a handful of meaningful ones
 if there are any superfluous or excessively large number of commits in your branch.
 
 If you would like a code review then add a contributor as a reviewer.
