@@ -3,24 +3,26 @@
 # Modular plugin loader
 import importlib
 
-preloadedPlugins = []
+preloaded_plugins = []
+
 
 def load(config):
-    pluginsAvailable = config["plugins"]
+    plugins_available = config["plugins"]
 
-    for plugin in pluginsAvailable:
-        pluginKey = list(plugin.keys())[0]
-        pluginData = plugin[pluginKey]
-        print(pluginData)
-        print("Preloading plugin: " + str(pluginKey))
-        pluginModule = importlib.import_module("mods."+pluginData["file"])
-        preloadedPlugins.append((pluginModule, plugin))
+    for plugin in plugins_available:
+        plugin_key = list(plugin.keys())[0]
+        plugin_data = plugin[plugin_key]
+        print(plugin_data)
+        print("Preloading plugin: " + str(plugin_key))
+        plugin_module = importlib.import_module("mods." + plugin_data["file"])
+        preloaded_plugins.append((plugin_module, plugin))
 
-    print("Loaded plugins into memory: " + str(preloadedPlugins))
-    
-def find_plugin(commandString):
-    for plugin in preloadedPlugins:
-        pluginName = list(plugin[1].keys())[0]
-        print(plugin[1][pluginName])
-        if plugin[1][pluginName]["command"] == commandString:
+    print("Loaded plugins into memory: " + str(preloaded_plugins))
+
+
+def find_plugin(command_string):
+    for plugin in preloaded_plugins:
+        plugin_name = list(plugin[1].keys())[0]
+        print(plugin[1][plugin_name])
+        if plugin[1][plugin_name]["command"] == command_string:
             return plugin[0]

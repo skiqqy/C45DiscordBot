@@ -154,6 +154,7 @@ class MyClient(discord.Client):
             else:
                 print("Message dropped, not a command")
 
+
 if __name__ == "__main__":
     if not os.path.isfile("resources/config.yml"):
         print("No configuration file found! See README.md.")

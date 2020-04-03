@@ -1,7 +1,7 @@
 
 import subprocess
 import requests
-import plugins
+from plugins import find_plugin
 
 from __init__ import cfg
 
@@ -71,7 +71,7 @@ def exec_command(command):
         return "feature request recorded"
     else:
          # Find the associated plugin
-        plugin = plugins.find_plugin(command)
+         plugin = find_plugin(command)
         if plugin is not None:
             message = plugin.exec(command)
             return message

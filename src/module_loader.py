@@ -4,21 +4,22 @@
 
 import os
 
-def loadModules(typeOf):
-	# Get a list of modules
-	modules = os.listdir(typeOf)
 
-	commands = {}
-	
-	for module in modules:
-		print("Module: " + str(module))
-		os.chdir(typeOf+"/")
-		print(module.split(".")[0])
-		import importlib
-		print(eval("import pong"))
-		moduleImported = importlib.import_module(module.split(".")[0])
-		commands[moduleImported.command] = moduleImported
-		os.chdir("../")
+def load_modules(type_of):
+    # Get a list of modules
+    modules = os.listdir(type_of)
 
-	# Now return a dictionary indexed by command word
-	return commands
+    commands = {}
+
+    for module in modules:
+        print("Module: " + str(module))
+        os.chdir(type_of + "/")
+        print(module.split(".")[0])
+        import importlib
+        print(eval("import pong"))
+        module_imported = importlib.import_module(module.split(".")[0])
+        commands[module_imported.command] = module_imported
+        os.chdir("../")
+
+    # Now return a dictionary indexed by command word
+    return commands
