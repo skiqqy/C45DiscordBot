@@ -45,6 +45,10 @@ All unit tests can be started with:
 ./test.sh
 ```
 
+#### Module usage
+
+Modules must be placed under `src/mods/` and also configured in the configuration file.
+
 ### Notes
 
 The bot prints output to stdout with regards to what it is doing
