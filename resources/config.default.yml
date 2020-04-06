@@ -9,9 +9,9 @@ token:
 
 plugins:
   - ping-pong:
-	  file: ping
-	  enabled: false
-	  command: ping
+      file: ping
+      enabled: false
+      command: ping
 #  - next_plugin:
 #      file: name
 #      enabled: bool
