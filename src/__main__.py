@@ -101,7 +101,8 @@ class MyClient(discord.Client):
                 await message.channel.send("Thank you Brink, very cool!")
 
             # Messages from everyone else
-            await message.channel.send(regex_based_response(message_content))
+            for m in regex_based_response(message_content):
+                await message.channel.send(m)
 
             if message_content[:3] == "how":
                 message_wiggle = ""
