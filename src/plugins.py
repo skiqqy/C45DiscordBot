@@ -23,8 +23,6 @@ def load(config):
         print('[ERR] No plugins are available')
 
 
-
-
 def find_plugin(command_string):
     if preloaded_plugins:
         for plugin in preloaded_plugins:
@@ -34,4 +32,3 @@ def find_plugin(command_string):
                 return plugin[0]
     else:
         print('[ERR] No pre-loaded plugins available')
-        

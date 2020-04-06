@@ -7,6 +7,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import plugins
 import emojis
 import bot_commands
+import re
 from __init__ import cfg
 
 analyser = SentimentIntensityAnalyzer()
@@ -51,7 +52,6 @@ class MyClient(discord.Client):
         async for guild in self.fetch_guilds():
             print(guild)
             guilds.append(guild)
-        c45 = guilds[0]
         webdev = guilds[1]
         channels = await webdev.fetch_channels()
         print(channels)
@@ -71,17 +71,15 @@ class MyClient(discord.Client):
         if os.getenv("bot_irc") == "1":
             try:
                 send_irc(message.channel, message)
-            except Exception as e:
+            except Exception as irc_e:
+                print("[ERR] Failed to send IRC.", irc_e)
                 try:
                     server.connect("192.168.1.121", 6667, "c45_bot")
-                except:
-                    print("Reconnect failed")
-                print("Failed to send IRC")
-                print(e)
+                except Exception as recon_e:
+                    print("[ERR] Reconnect failed", recon_e)
 
-        # moduleLoader.loadModules("on_message")
-
-        await add_emoji(message, score_message_sentiment(message.content))
+        message_content = message.content.lower()
+        await add_emoji(message, score_message_sentiment(message_content))
 
         # Ignore messages from the bot
         if message.author == self.user:
@@ -102,27 +100,28 @@ class MyClient(discord.Client):
                 await add_emoji(message, "🇰")
                 await message.channel.send("Thank you Brink, very cool!")
             # Messages from everyone else
-            if "test" in message.content.lower():
-                # get the id
-                id = message.author.id
-                print("ID is: " + str(id))
 
+            if re.search("^.*(\\w*[\b ]?test([. ]+\\w*| +)?)$", message_content):
+                print('[DEBUG] Test hit!')
+                # get the id
+                author_id = message.author.id
+                print("[DEBUG] ID is: ", author_id)
                 await message.channel.send("Marks out")
                 await message.channel.send("?")
             elif message.content.lower()[:3] == "how":
-                messageWiggle = ""
+                message_wiggle = ""
                 i = True
                 p = 0
                 for ch in message.content:
                     if i:
-                        messageWiggle += ch.upper()
+                        message_wiggle += ch.upper()
                         i = False
                     else:
-                        messageWiggle += ch.lower()
+                        message_wiggle += ch.lower()
                         i = True
-                    print(messageWiggle)
+                    print(message_wiggle)
                     p += 1
-                await message.channel.send(messageWiggle)
+                await message.channel.send(message_wiggle)
             elif "papi" in message.content.lower():
                 await message.channel.send(random.choice([
                     "UWU DID SOMEBODY SAY P A P I",
@@ -140,15 +139,12 @@ class MyClient(discord.Client):
                 command = message.content[1:].strip()
                 print("Got command: \"" + command + "\"")
                 command_output = bot_commands.exec_command(command)
-                await message.channel.send("[Host Machine: " + \
-                                           subprocess.getoutput("hostname") + "]\n" + \
+                await message.channel.send("[Host Machine: " +
+                                           subprocess.getoutput("hostname") + "]\n" +
                                            str(command_output))
             elif "vim" in message.content.lower():
-                response = "vim is where its at chief\nif you have no idea how to use it or configure it, then look " \
-                           "no further than the __epic gamer__:tm: config " \
-                           "https://github.com/skippy404/.dotfilesMinimal for litty configs for vim and other " \
-                           "stuff.\nThis message is endorsed by: Skippy \"vim or gtfo\" Cochrane. "
-                await message.channel.send(response)
+                f = open("./resources/vim.txt", "r")
+                await message.channel.send(f.readline())
             elif "eclipse" in message.content.lower():
                 await message.channel.send("eclipse kaka, IDE's kaka")
             else:
