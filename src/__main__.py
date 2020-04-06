@@ -13,7 +13,7 @@ analyser = SentimentIntensityAnalyzer()
 
 
 def score_message_sentiment(sentence):
-    score = int(analyser.polarity_scores(sentence)['compound'] * 10)
+    score = int(((analyser.polarity_scores(sentence)['compound'] + 1) / 2) * 10)
     return emojis.number_emojis[score]
 
 
