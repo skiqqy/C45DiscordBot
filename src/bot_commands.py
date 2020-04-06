@@ -1,18 +1,19 @@
 import subprocess
 import requests
+from plugins import find_plugin
 
 
 def exec_command(command):
     if command.startswith("exec"):
         cmd = command[4:]
         print("Exec: " + str(cmd))
-        #return subprocess.getoutput(cmd)
+        # return subprocess.getoutput(cmd)
         return "Exec is down, changes being made."
     elif command.startswith("python3"):
         cmad = command[7:]
-        if (cmad.find("os") == -1 and \
-            cmad.find("subprocess") == -1 and \
-            cmad.find("open(") == -1):
+        if (cmad.find("os") == -1 and
+                cmad.find("subprocess") == -1 and
+                cmad.find("open(") == -1):
             try:
                 return eval(cmad)
             except:
@@ -34,8 +35,8 @@ def exec_command(command):
     elif command.lower() == "ip:neigh":
         return subprocess.getoutput("ip neigh")
     elif command.startswith("ls"):
-        dirLS = command[2:]
-        return subprocess.getoutput("ls " + dirLS)
+        dir_ls = command[2:]
+        return subprocess.getoutput("ls " + dir_ls)
     elif command.lower().startswith("ip:ping"):
         ip = command[7:]
         return subprocess.getoutput("ping " + ip + " -c 3")
@@ -61,10 +62,17 @@ def exec_command(command):
     elif command.startswith("add_feature"):
         line = command[12:]
         print("adding feature: " + line)
-        f = open("./resources/features.txt","a")
-        f.write(str(line + "\n"));
+        f = open("./resources/features.txt", "a")
+        f.write(str(line + "\n"))
         f.close()
         return "feature request recorded"
+    else:
+        # Find the associated plugin
+        plugin = find_plugin(command)
+    if plugin is not None:
+        print('Found plugin')
+        message = plugin.execute(command)
+        return message
     else:
         print("\"" + str(command) + "\"" + " released, not a valid command")
         return "Not a command you chop"

@@ -3,15 +3,13 @@ import random
 import subprocess
 import discord
 import irc.client
-import yaml
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
-#from src import emojis, bot_commands
+import plugins
 import emojis
 import bot_commands
+from __init__ import cfg
 
 analyser = SentimentIntensityAnalyzer()
-cfg = None
 
 
 def score_message_sentiment(sentence):
@@ -137,9 +135,9 @@ class MyClient(discord.Client):
                 msg = fl.readlines()
                 index = random.randint(0, len(msg) - 1)
                 await message.channel.send(msg[index])
-            elif message.content.startswith("/command"):
+            elif message.content.startswith("/"):
                 # Remove the `>`
-                command = message.content[8:].strip()
+                command = message.content[1:].strip()
                 print("Got command: \"" + command + "\"")
                 command_output = bot_commands.exec_command(command)
                 await message.channel.send("[Host Machine: " + \
@@ -158,10 +156,11 @@ class MyClient(discord.Client):
 
 
 if __name__ == "__main__":
-    if not os.path.isfile("./resources/config.yml"):
+    if not os.path.isfile("resources/config.yml"):
         print("No configuration file found! See README.md.")
-    with open("./resources/config.yml", "r") as ymlfile:
-        cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
+
+    # Preload plugins
+    plugins.load(cfg)
 
     try:
         if cfg["irc"]["enabled"]:
