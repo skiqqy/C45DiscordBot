@@ -70,7 +70,8 @@ def exec_command(command):
         # Find the associated plugin
         plugin = find_plugin(command)
     if plugin is not None:
-        message = plugin.exec(command)
+        print('Found plugin')
+        message = plugin.execute(command)
         return message
     else:
         print("\"" + str(command) + "\"" + " released, not a valid command")
