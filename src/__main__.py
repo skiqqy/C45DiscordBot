@@ -137,9 +137,9 @@ class MyClient(discord.Client):
                 msg = fl.readlines()
                 index = random.randint(0, len(msg) - 1)
                 await message.channel.send(msg[index])
-            elif message.content.startswith("/command"):
+            elif message.content.startswith("/"):
                 # Remove the `>`
-                command = message.content[8:].strip()
+                command = message.content[1:].strip()
                 print("Got command: \"" + command + "\"")
                 command_output = bot_commands.exec_command(command)
                 await message.channel.send("[Host Machine: " + \
