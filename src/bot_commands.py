@@ -6,7 +6,7 @@ from plugins import find_plugin
 def exec_command(command):
     if command.startswith("exec"):
         cmd = command[4:]
-        print("Exec: " + str(cmd))
+        print("[INFO] Exec: " + str(cmd))
         # return subprocess.getoutput(cmd)
         return "Exec is down, changes being made."
     elif command.startswith("python3"):
@@ -16,7 +16,8 @@ def exec_command(command):
                 cmad.find("open(") == -1):
             try:
                 return eval(cmad)
-            except:
+            except Exception as e:
+                print("[WARN] Eval exception.", e)
                 return "error in eval"
         else:
             return "For safety, this command cannot be run"
@@ -61,7 +62,7 @@ def exec_command(command):
         return msg
     elif command.startswith("add_feature"):
         line = command[12:]
-        print("adding feature: " + line)
+        print("[INFO] Adding feature: " + line)
         f = open("./resources/features.txt", "a")
         f.write(str(line + "\n"))
         f.close()
@@ -70,9 +71,9 @@ def exec_command(command):
         # Find the associated plugin
         plugin = find_plugin(command)
     if plugin is not None:
-        print('Found plugin')
+        print('[DEBUG] Found plugin')
         message = plugin.execute(command)
         return message
     else:
-        print("\"" + str(command) + "\"" + " released, not a valid command")
+        print("[INFO] \"" + str(command) + "\"" + " released, not a valid command")
         return "Not a command you chop"

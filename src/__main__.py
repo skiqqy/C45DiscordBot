@@ -7,6 +7,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import plugins
 import emojis
 import bot_commands
+from message_based_responses import regex_based_response
 from __init__ import cfg
 
 analyser = SentimentIntensityAnalyzer()
@@ -51,7 +52,6 @@ class MyClient(discord.Client):
         async for guild in self.fetch_guilds():
             print(guild)
             guilds.append(guild)
-        c45 = guilds[0]
         webdev = guilds[1]
         channels = await webdev.fetch_channels()
         print(channels)
@@ -71,17 +71,15 @@ class MyClient(discord.Client):
         if os.getenv("bot_irc") == "1":
             try:
                 send_irc(message.channel, message)
-            except Exception as e:
+            except Exception as irc_e:
+                print("[ERR] Failed to send IRC.", irc_e)
                 try:
                     server.connect("192.168.1.121", 6667, "c45_bot")
-                except:
-                    print("Reconnect failed")
-                print("Failed to send IRC")
-                print(e)
+                except Exception as recon_e:
+                    print("[ERR] Reconnect failed", recon_e)
 
-        # moduleLoader.loadModules("on_message")
-
-        await add_emoji(message, score_message_sentiment(message.content))
+        message_content = message.content.lower()
+        await add_emoji(message, score_message_sentiment(message_content))
 
         # Ignore messages from the bot
         if message.author == self.user:
@@ -101,58 +99,34 @@ class MyClient(discord.Client):
                 await add_emoji(message, "🇳")
                 await add_emoji(message, "🇰")
                 await message.channel.send("Thank you Brink, very cool!")
-            # Messages from everyone else
-            if "test" in message.content.lower():
-                # get the id
-                id = message.author.id
-                print("ID is: " + str(id))
 
-                await message.channel.send("Marks out")
-                await message.channel.send("?")
-            elif message.content.lower()[:3] == "how":
-                messageWiggle = ""
+            # Messages from everyone else
+            for m in regex_based_response(message_content):
+                await message.channel.send(m)
+
+            if message_content[:3] == "how":
+                message_wiggle = ""
                 i = True
                 p = 0
                 for ch in message.content:
                     if i:
-                        messageWiggle += ch.upper()
+                        message_wiggle += ch.upper()
                         i = False
                     else:
-                        messageWiggle += ch.lower()
+                        message_wiggle += ch.lower()
                         i = True
-                    print(messageWiggle)
+                    print(message_wiggle)
                     p += 1
-                await message.channel.send(messageWiggle)
-            elif "papi" in message.content.lower():
-                await message.channel.send(random.choice([
-                    "UWU DID SOMEBODY SAY P A P I",
-                    "Yas daddi 🤪",
-                    "Big P A P I Dave 😍"
-                ]))
-                await message.pin()
-            elif "triggered" in message.content.lower():
-                fl = open("./resources/triggered.lol", "r")
-                msg = fl.readlines()
-                index = random.randint(0, len(msg) - 1)
-                await message.channel.send(msg[index])
-            elif message.content.startswith("/"):
-                # Remove the `>`
-                command = message.content[1:].strip()
-                print("Got command: \"" + command + "\"")
+                await message.channel.send(message_wiggle)
+            elif message_content.startswith("/"):
+                command = message_content[1:].strip()
+                print("[DEBUG] Got command: \"" + command + "\"")
                 command_output = bot_commands.exec_command(command)
-                await message.channel.send("[Host Machine: " + \
-                                           subprocess.getoutput("hostname") + "]\n" + \
+                await message.channel.send("[Host Machine: " +
+                                           subprocess.getoutput("hostname") + "]\n" +
                                            str(command_output))
-            elif "vim" in message.content.lower():
-                response = "vim is where its at chief\nif you have no idea how to use it or configure it, then look " \
-                           "no further than the __epic gamer__:tm: config " \
-                           "https://github.com/skippy404/.dotfilesMinimal for litty configs for vim and other " \
-                           "stuff.\nThis message is endorsed by: Skippy \"vim or gtfo\" Cochrane. "
-                await message.channel.send(response)
-            elif "eclipse" in message.content.lower():
-                await message.channel.send("eclipse kaka, IDE's kaka")
             else:
-                print("Message dropped, not a command")
+                print("[WARN] Message dropped, not a command")
 
 
 if __name__ == "__main__":
