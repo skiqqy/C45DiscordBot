@@ -7,7 +7,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import plugins
 import emojis
 import bot_commands
-import re
+from message_based_responses import regex_based_response
 from __init__ import cfg
 
 analyser = SentimentIntensityAnalyzer()
@@ -99,16 +99,11 @@ class MyClient(discord.Client):
                 await add_emoji(message, "🇳")
                 await add_emoji(message, "🇰")
                 await message.channel.send("Thank you Brink, very cool!")
-            # Messages from everyone else
 
-            if re.search("^.*(\\w*[\b ]?test([. ]+\\w*| +)?)$", message_content):
-                print('[DEBUG] Test hit!')
-                # get the id
-                author_id = message.author.id
-                print("[DEBUG] ID is: ", author_id)
-                await message.channel.send("Marks out")
-                await message.channel.send("?")
-            elif message.content.lower()[:3] == "how":
+            # Messages from everyone else
+            await message.channel.send(regex_based_response(message_content))
+
+            if message_content[:3] == "how":
                 message_wiggle = ""
                 i = True
                 p = 0
@@ -122,33 +117,15 @@ class MyClient(discord.Client):
                     print(message_wiggle)
                     p += 1
                 await message.channel.send(message_wiggle)
-            elif "papi" in message.content.lower():
-                await message.channel.send(random.choice([
-                    "UWU DID SOMEBODY SAY P A P I",
-                    "Yas daddi 🤪",
-                    "Big P A P I Dave 😍"
-                ]))
-                await message.pin()
-            elif "triggered" in message.content.lower():
-                fl = open("./resources/triggered.lol", "r")
-                msg = fl.readlines()
-                index = random.randint(0, len(msg) - 1)
-                await message.channel.send(msg[index])
-            elif message.content.startswith("/"):
-                # Remove the `>`
-                command = message.content[1:].strip()
-                print("Got command: \"" + command + "\"")
+            elif message_content.startswith("/"):
+                command = message_content[1:].strip()
+                print("[DEBUG] Got command: \"" + command + "\"")
                 command_output = bot_commands.exec_command(command)
                 await message.channel.send("[Host Machine: " +
                                            subprocess.getoutput("hostname") + "]\n" +
                                            str(command_output))
-            elif "vim" in message.content.lower():
-                f = open("./resources/vim.txt", "r")
-                await message.channel.send(f.readline())
-            elif "eclipse" in message.content.lower():
-                await message.channel.send("eclipse kaka, IDE's kaka")
             else:
-                print("Message dropped, not a command")
+                print("[WARN] Message dropped, not a command")
 
 
 if __name__ == "__main__":
