@@ -18,7 +18,6 @@ def regex_based_response(message):
             "Yas daddi 🤪",
             "Big P A P I Dave 😍"
         ]))
-        await message.pin()
     elif re.search("^.*(\\w*[\b ]?triggered([. ]+\\w*| +)?)$", message_content):
         fl = open("./resources/triggered.lol", "r")
         msg = fl.readlines()
