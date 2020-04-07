@@ -9,10 +9,10 @@ Proprietary™ (that's a joke btw) c45 discord bot.
 To use the bot, go [here](https://discordapp.com/oauth2/authorize?client_id=694185053156016178&scope=bot&permissions=8)
 and add it to your server.
 
-Once added on the server, the command prefix is '>', example of using the bot.
+Once added on the server, the command prefix is '/', example of using the bot.
 
 ```
->help
+/help
 ```
 
 ## Getting Started
