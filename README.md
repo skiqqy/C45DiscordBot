@@ -36,19 +36,19 @@ All dependencies can be found under `resources/requirements.txt`. The following 
 will install all Python dependencies required (Python3/Unix):
 
 ```bash
-./c45bot.sh compile
+./c45bot compile
 ```
 
 Once the bot is configured and all dependencies are installed, one can run it using:
 
 ```bash
-./c45both.sh start
+./c45both start
 ```
 
 All unit tests can be started with:
 
 ```bash
-./c45bot.sh test
+./c45bot test
 ```
 
 #### Module usage
