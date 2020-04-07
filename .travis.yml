@@ -2,11 +2,11 @@ os: linux
 
 language: python
 python:
-  - "3.6"
-  - "3.7"
-  - "3.8"
+  - '3.6'
+  - '3.7'
+  - '3.8'
 
 install:
   - pip3 install -r ./resources/requirements.txt
 
-script: ./test.sh
+script: ./c45bot test
