@@ -9,4 +9,4 @@ python:
 install:
   - pip3 install -r ./resources/requirements.txt
 
-script: ./c45bot.sh test
+script: ./c45bot test
