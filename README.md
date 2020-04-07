@@ -42,7 +42,7 @@ will install all Python dependencies required (Python3/Unix):
 Once the bot is configured and all dependencies are installed, one can run it using:
 
 ```bash
-./c45both start
+./c45bot start
 ```
 
 All unit tests can be started with:
