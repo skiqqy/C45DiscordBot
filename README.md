@@ -1,6 +1,7 @@
 # C45DiscordBot
 
-Proprietary™ (that's a joke btw) c45 discord bot.
+Proprietary™ (that's a joke btw) c45 discord bot. The bot is currently running
+in a docker container on a raspberrypi 3b.
 
 [![Build Status](https://travis-ci.com/Skippy404/C45DiscordBot.svg?branch=master)](https://travis-ci.com/Skippy404/C45DiscordBot)
 
@@ -31,6 +32,13 @@ If you dont, the bot will not work, if you dont know how to create a token,
 please go read up about Discord bot tokens.
 
 ### Running
+
+Important, when running the bot with your token, you must add this *unique* bot
+to your discord server using this link:
+````
+https://discordapp.com/oauth2/authorize?client_id=YOUR_BOT_ID_HERE&scope=bot&permissions=8)
+````
+You obtain 'YOUR\_BOT\_ID\_HERE' at the same place where you created your token.
 
 All dependencies can be found under `resources/requirements.txt`. The following convenience script
 will install all Python dependencies required (Python3/Unix):
