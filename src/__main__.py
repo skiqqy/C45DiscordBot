@@ -85,6 +85,19 @@ class MyClient(discord.Client):
         if message.author == self.user:
             return
         else:
+            if message.content.startswith('del'):
+
+                if message.content.split()[2:]:
+                    text_match = ' '.join(message.content.split()[1:])
+                else:
+                    text_match = None
+                
+                def check(msg):
+                    return msg.author.id == client.user.id and (text_match.lower() in message.content.lower() if text_match is not None else True)
+
+                deleted = await message.channel.purge(limit=int(message.content.split()[1]), check=check)
+                await message.channel.send(message.author.mention, embed=discord.Embed(title=f"Deleted `{len(deleted)}` messages", colour=discord.Colour.green()), delete_after=3)
+
             await add_emoji(message, random.choice(emojis.troll_emojis))
             # Other user-specific messages
             if "bigdatadave" in str(message.author).lower():
