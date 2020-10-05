@@ -128,7 +128,7 @@ class MyClient(discord.Client):
                                            str(command_output))
 
                 # if message.content.startswith('del'):
-                if command == "del":
+                if command.startswith('del'):
 
                     if message.content.split()[2:]:
                         text_match = ' '.join(message.content.split()[1:])
